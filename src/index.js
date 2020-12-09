@@ -3,10 +3,33 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { Provider } from 'react-redux';
+import { createStore, combineReducers } from 'redux';
+//import ResultReducer from './Reducers/ResultReducer';
+//import CounterReducer from './Reducers/CounterReducer';
+import EmployeeState from './Reducers/EmployeeState';
+import DeptState from './Reducers/DepartmentState';
+
+/*const reducers = combineReducers({
+  cntrReducer: CounterReducer,
+  resReducer: ResultReducer
+})*/
+
+
+const reducers = combineReducers({
+  empReducer: EmployeeState,
+  deptReducer:DeptState
+  
+})
+
+const store = createStore(reducers);
+store.subscribe(()=>console.log("testing"));
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
